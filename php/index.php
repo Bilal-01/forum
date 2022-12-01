@@ -19,11 +19,6 @@
 
         case "POST":
             $data = json_decode( file_get_contents('php://input') );
-            // if($db->insert('user', ['id'=>null, 'email'=>$user->email, 'password'=>$user->password])) {
-            //     $response = ['status' => 1, 'message' => 'Record created successfully.'];
-            // } else {
-            //     $response = ['status' => 0, 'message' => 'Failed to create record.'];
-            // }
             if($data->password === ''){
                 if($user->register($data->email)){
                     $response = ['status' => 1, 'message' => 'User successfully registered'];
@@ -33,7 +28,7 @@
                 }
             }
             else if($user->login($data->email, $data->password)){
-                $response = ['status' => 1, 'message' => 'Login successfull.'];
+                $response = ['status' => 1, 'message' => 'Login successfull.', 'user' => $data];
             }
             else{
                 $response = ['status' => 0, 'message' => 'Incorrect email / password.'];
