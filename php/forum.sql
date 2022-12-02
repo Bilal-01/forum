@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2022 at 12:02 PM
+-- Generation Time: Dec 02, 2022 at 04:24 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -40,7 +40,9 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`Bid`, `Heading`, `post_by`, `date_of_post`, `description`) VALUES
-(1, 'Bilal is an idiot', 'k200397', '2022-12-01', 'Why bilal is an idiot');
+(1, 'Loren ipsum', 'k200397', '2022-12-01', 'Lorem ipsum dolor sit amet. Id provident consequatur et sint minus sit quam quia et dolores itaque. Vel cumque voluptas cum nisi Quis ad eius impedit. Et nobis saepe aut impedit maiores qui suscipit eligendi nam magni quam ut explicabo internos sit autem '),
+(2, 'Loren ipsum', 'k200434', '2022-12-02', 'Lorem ipsum dolor sit amet. Id provident consequatur et sint minus sit quam quia et dolores itaque. Vel cumque voluptas cum nisi Quis ad eius impedit. Et nobis saepe aut impedit maiores qui suscipit eligendi nam magni quam ut explicabo internos sit autem '),
+(7, 'Loren ipsum', 'k200434', '2022-12-02', 'Lorem ipsum dolor sit amet. Id provident consequatur et sint minus sit quam quia et dolores itaque. Vel cumque voluptas cum nisi Quis ad eius impedit. Et nobis saepe aut impedit maiores qui suscipit eligendi nam magni quam ut explicabo internos sit autem ');
 
 -- --------------------------------------------------------
 
@@ -70,13 +72,15 @@ INSERT INTO `user` (`id`, `email`, `password`) VALUES
 -- Indexes for table `blog`
 --
 ALTER TABLE `blog`
-  ADD PRIMARY KEY (`Bid`);
+  ADD PRIMARY KEY (`Bid`),
+  ADD KEY `post_by` (`post_by`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -86,7 +90,17 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `Bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `blog`
+--
+ALTER TABLE `blog`
+  ADD CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`post_by`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
