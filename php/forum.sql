@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2022 at 04:57 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.0.25
+-- Generation Time: Dec 02, 2022 at 07:46 PM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -40,54 +40,9 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`Bid`, `Heading`, `post_by`, `date_of_post`, `description`) VALUES
-(1, 'Bilal is an idiot', 'k200397', '2022-12-01', 'Why bilal is an idiot');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `carpool`
---
-
-CREATE TABLE `carpool` (
-  `carpool_id` int(11) NOT NULL,
-  `pick_up` varchar(50) NOT NULL,
-  `drop_off` varchar(50) NOT NULL,
-  `route` varchar(100) NOT NULL,
-  `captain_id` varchar(7) NOT NULL,
-  `phoneNo` varchar(20) NOT NULL,
-  `time` varchar(10) NOT NULL,
-  `day` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `carpool`
---
-
-INSERT INTO `carpool` (`carpool_id`, `pick_up`, `drop_off`, `route`, `captain_id`, `phoneNo`, `time`, `day`) VALUES
-(1, 'Federal B Area', 'Fast', 'F.b.Area->Fast', 'k200397', '03201348083', '8:00', 'Monday'),
-(27, 'karimabad', 'fast', 'karimabad->fast', 'K200434', '1344', '2022-12-02', 'Monday'),
-(28, 'karimabad', 'fast', 'karimabad->fast', 'K200434', '1344', '2022-12-02', 'Monday');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `project`
---
-
-CREATE TABLE `project` (
-  `project_id` int(11) NOT NULL,
-  `course_id` varchar(10) NOT NULL,
-  `student_id` varchar(7) NOT NULL,
-  `date_of_post` date NOT NULL,
-  `github_link` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `project`
---
-
-INSERT INTO `project` (`project_id`, `course_id`, `student_id`, `date_of_post`, `github_link`) VALUES
-(1, '123', 'k200397', '2022-12-02', 'github.com/xyz');
+(1, 'Loren ipsum', 'k200397', '2022-12-01', 'Lorem ipsum dolor sit amet. Id provident consequatur et sint minus sit quam quia et dolores itaque. Vel cumque voluptas cum nisi Quis ad eius impedit. Et nobis saepe aut impedit maiores qui suscipit eligendi nam magni quam ut explicabo internos sit autem '),
+(2, 'Loren ipsum', 'k200434', '2022-12-02', 'Lorem ipsum dolor sit amet. Id provident consequatur et sint minus sit quam quia et dolores itaque. Vel cumque voluptas cum nisi Quis ad eius impedit. Et nobis saepe aut impedit maiores qui suscipit eligendi nam magni quam ut explicabo internos sit autem '),
+(7, 'Loren ipsum', 'k200434', '2022-12-02', 'Lorem ipsum dolor sit amet. Id provident consequatur et sint minus sit quam quia et dolores itaque. Vel cumque voluptas cum nisi Quis ad eius impedit. Et nobis saepe aut impedit maiores qui suscipit eligendi nam magni quam ut explicabo internos sit autem ');
 
 -- --------------------------------------------------------
 
@@ -99,15 +54,15 @@ CREATE TABLE `user` (
   `id` varchar(7) NOT NULL,
   `email` varchar(17) NOT NULL,
   `password` varchar(55) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `password`) VALUES
-('k200397', 'k200397@nu.edu.pk', 'qwerty123456'),
-('k200434', 'k200434@nu.edu.pk', 'k20043491106');
+INSERT INTO `user` (`id`, `email`, `password`, `role`) VALUES
+('k200397', 'k200397@nu.edu.pk', 'qwerty123456', 0),
+('k200434', 'k200434@nu.edu.pk', 'k20043491106', 0);
 
 --
 -- Indexes for dumped tables
@@ -117,27 +72,15 @@ INSERT INTO `user` (`id`, `email`, `password`) VALUES
 -- Indexes for table `blog`
 --
 ALTER TABLE `blog`
-  ADD PRIMARY KEY (`Bid`);
-
---
--- Indexes for table `carpool`
---
-ALTER TABLE `carpool`
-  ADD PRIMARY KEY (`carpool_id`),
-  ADD KEY `carpool_user_FK` (`captain_id`);
-
---
--- Indexes for table `project`
---
-ALTER TABLE `project`
-  ADD PRIMARY KEY (`project_id`),
-  ADD KEY `project_user_FK` (`student_id`);
+  ADD PRIMARY KEY (`Bid`),
+  ADD KEY `post_by` (`post_by`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -147,35 +90,17 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `Bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `carpool`
---
-ALTER TABLE `carpool`
-  MODIFY `carpool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT for table `project`
---
-ALTER TABLE `project`
-  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `carpool`
+-- Constraints for table `blog`
 --
-ALTER TABLE `carpool`
-  ADD CONSTRAINT `carpool_user_FK` FOREIGN KEY (`captain_id`) REFERENCES `user` (`id`);
-
---
--- Constraints for table `project`
---
-ALTER TABLE `project`
-  ADD CONSTRAINT `project_user_FK` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`);
+ALTER TABLE `blog`
+  ADD CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`post_by`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
