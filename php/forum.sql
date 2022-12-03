@@ -33,7 +33,7 @@ CREATE TABLE `blog` (
   `post_by` varchar(7) NOT NULL,
   `date_of_post` date NOT NULL DEFAULT current_timestamp(),
   `description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `blog`
@@ -129,9 +129,6 @@ CREATE TABLE `teacher` (
 INSERT INTO `teacher` (`id`, `name`, `email`, `location`) VALUES
 (1, 'Amin Sadiq', 'amin.sadiq@nu.edu.pk', 'CS Building, First Floor, Faculty Room'),
 (2, 'Danish Khan', 'danish.khan@nu.edu.pk', 'Don\'t go. Run away while you can!');
-(1, 'Loren ipsum', 'k200397', '2022-12-01', 'Lorem ipsum dolor sit amet. Id provident consequatur et sint minus sit quam quia et dolores itaque. Vel cumque voluptas cum nisi Quis ad eius impedit. Et nobis saepe aut impedit maiores qui suscipit eligendi nam magni quam ut explicabo internos sit autem '),
-(2, 'Loren ipsum', 'k200434', '2022-12-02', 'Lorem ipsum dolor sit amet. Id provident consequatur et sint minus sit quam quia et dolores itaque. Vel cumque voluptas cum nisi Quis ad eius impedit. Et nobis saepe aut impedit maiores qui suscipit eligendi nam magni quam ut explicabo internos sit autem '),
-(7, 'Loren ipsum', 'k200434', '2022-12-02', 'Lorem ipsum dolor sit amet. Id provident consequatur et sint minus sit quam quia et dolores itaque. Vel cumque voluptas cum nisi Quis ad eius impedit. Et nobis saepe aut impedit maiores qui suscipit eligendi nam magni quam ut explicabo internos sit autem ');
 
 -- --------------------------------------------------------
 
@@ -142,7 +139,8 @@ INSERT INTO `teacher` (`id`, `name`, `email`, `location`) VALUES
 CREATE TABLE `user` (
   `id` varchar(7) NOT NULL,
   `email` varchar(17) NOT NULL,
-  `password` varchar(55) NOT NULL
+  `password` varchar(55) NOT NULL,
+  `role` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -189,15 +187,12 @@ ALTER TABLE `project`
 --
 ALTER TABLE `teacher`
   ADD PRIMARY KEY (`id`);
-  ADD PRIMARY KEY (`Bid`),
-  ADD KEY `post_by` (`post_by`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -207,14 +202,32 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `Bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `carpool`
+--
+ALTER TABLE `carpool`
+  MODIFY `carpool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `project`
+--
+ALTER TABLE `project`
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `teacher`
+--
+ALTER TABLE `teacher`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `blog`
+-- Constraints for table `carpool`
 --
 ALTER TABLE `carpool`
   ADD CONSTRAINT `carpool_user_FK` FOREIGN KEY (`captain_id`) REFERENCES `user` (`id`);
@@ -230,8 +243,6 @@ ALTER TABLE `course`
 --
 ALTER TABLE `project`
   ADD CONSTRAINT `project_user_FK` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`);
-ALTER TABLE `blog`
-  ADD CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`post_by`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

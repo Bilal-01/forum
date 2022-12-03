@@ -45,6 +45,35 @@
             $this->_error = true;
             return $this;
         }
+
+        public function complexQuery($sql){
+            $this->error = false;
+            if($this->_query = $this->_pdo->prepare($sql)){
+                if ($this->_query->execute()) {
+                    $this->_results = $this->_query->fetchAll();
+                    $this->_count = count($this->_results);
+                    return $this;
+                } 
+            }
+            $this->_error = true;
+            return $this;
+        }
+
+        public function complexAction($action, $table, $where = [], $joinCondition){
+            if (count($where) === 3) {
+                $operators = ['!=', '=', '>', '<', '<=', '>='];
+                $field = $where[0];
+                $operator = $where[1];
+                $value = $where[2];
+                if (in_array($operator, $operators)) {
+                    $sql = "{$action} FROM {$table}, {$joinCondition}  WHERE {$field} {$operator} ?";
+                    if (!$this->query($sql, [$value])->error()) {
+                        return $this;
+                    }
+                }
+            }
+            return false;
+        }
     
         public function action($action, $table, $where = []){
             if (count($where) === 3) {
@@ -66,6 +95,11 @@
     
         public function get($table, $where = []){    
             $this->action('SELECT *', $table, $where);
+            return $this;
+        }
+
+        public function getWithJoin($table, $columns=[], $where = [], $joinCondition){
+            $this->complexAction('SELECT *', $table, $where, $joinCondition);
             return $this;
         }
 
