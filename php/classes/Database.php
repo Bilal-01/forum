@@ -59,21 +59,6 @@
             return $this;
         }
 
-        public function complexAction($action, $table, $where = [], $joinCondition){
-            if (count($where) === 3) {
-                $operators = ['!=', '=', '>', '<', '<=', '>='];
-                $field = $where[0];
-                $operator = $where[1];
-                $value = $where[2];
-                if (in_array($operator, $operators)) {
-                    $sql = "{$action} FROM {$table}, {$joinCondition}  WHERE {$field} {$operator} ?";
-                    if (!$this->query($sql, [$value])->error()) {
-                        return $this;
-                    }
-                }
-            }
-            return false;
-        }
     
         public function action($action, $table, $where = []){
             if (count($where) === 3) {
@@ -95,11 +80,6 @@
     
         public function get($table, $where = []){    
             $this->action('SELECT *', $table, $where);
-            return $this;
-        }
-
-        public function getWithJoin($table, $columns=[], $where = [], $joinCondition){
-            $this->complexAction('SELECT *', $table, $where, $joinCondition);
             return $this;
         }
 
