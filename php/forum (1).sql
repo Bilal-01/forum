@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2022 at 08:52 AM
+-- Generation Time: Dec 03, 2022 at 12:01 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -40,7 +40,9 @@ CREATE TABLE `blog` (
 --
 
 INSERT INTO `blog` (`Bid`, `Heading`, `post_by`, `date_of_post`, `description`) VALUES
-(1, 'Bilal is an idiot', 'k200397', '2022-12-01', 'Why bilal is an idiot');
+(1, 'Lorem Ipsum', 'k200397', '2022-12-01', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla pretium mi a volutpat. Phasellus sed enim vitae justo feugiat venenatis at id purus. Aenean eros felis, egestas eget fringilla ac, fringilla vitae lectus. Nullam tincidunt at urna eu '),
+(2, 'Lorem ipsum', 'k200434', '2022-12-03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla pretium mi a volutpat. Phasellus sed enim vitae justo feugiat venenatis at id purus. Aenean eros felis, egestas eget fringilla ac, fringilla vitae lectus. Nullam tincidunt at urna eu '),
+(3, 'Lorem ipsum', 'k200434', '2022-12-03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla pretium mi a volutpat. Phasellus sed enim vitae justo feugiat venenatis at id purus. Aenean eros felis, egestas eget fringilla ac, fringilla vitae lectus. Nullam tincidunt at urna eu ');
 
 -- --------------------------------------------------------
 
@@ -112,17 +114,46 @@ INSERT INTO `project` (`project_id`, `course_id`, `student_id`, `date_of_post`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `resource`
+--
+
+CREATE TABLE `resource` (
+  `ID` int(11) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `course_id` varchar(10) NOT NULL,
+  `student_id` varchar(7) NOT NULL,
+  `Drive_Link` varchar(100) NOT NULL,
+  `date_of_publish` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `resource`
+--
+
+INSERT INTO `resource` (`ID`, `type`, `course_id`, `student_id`, `Drive_Link`, `date_of_publish`) VALUES
+(1, 'Assignment', 'CS2001', 'k200397', 'https://drive.google.com/xyz', '2022-12-03');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `society`
 --
 
 CREATE TABLE `society` (
   `society_id` int(11) NOT NULL,
-  `sname` varchar(15) NOT NULL,
-  `sdescription` varchar(50) NOT NULL,
+  `sname` varchar(150) NOT NULL,
+  `sdescription` varchar(500) NOT NULL,
   `head_id` int(11) NOT NULL,
   `president_id` varchar(7) NOT NULL,
   `socialMedia_link` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `society`
+--
+
+INSERT INTO `society` (`society_id`, `sname`, `sdescription`, `head_id`, `president_id`, `socialMedia_link`) VALUES
+(1, 'Dramatic and Extra Curricular Society', 'DECS has always been on the go in planning extra-activities such as picnics for the FASTians which prove to be both exhilarating and exclusive', 1, 'k200397', 'https://www.facebook.com/decsfast/');
 
 -- --------------------------------------------------------
 
@@ -143,7 +174,29 @@ CREATE TABLE `teacher` (
 
 INSERT INTO `teacher` (`tid`, `tname`, `email`, `location`) VALUES
 (1, 'Amin Sadiq', 'amin.sadiq@nu.edu.pk', 'CS Building, First Floor, Faculty Room'),
-(2, 'Danish Khan', 'danish.khan@nu.edu.pk', 'Don\'t go. Run away while you can!');
+(2, 'Danish Khan', 'danish.khan@nu.edu.pk', 'Don\'t go. Run away while you can!'),
+(3, 'Abdul Bari', 'abdul.bari@nu.edu.pk', 'EE First floor, Faculty Offices');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `timetable`
+--
+
+CREATE TABLE `timetable` (
+  `tt_id` int(11) NOT NULL,
+  `ttday` varchar(10) NOT NULL,
+  `tcode` varchar(20) NOT NULL,
+  `croom` varchar(10) NOT NULL,
+  `timeslot` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `timetable`
+--
+
+INSERT INTO `timetable` (`tt_id`, `ttday`, `tcode`, `croom`, `timeslot`) VALUES
+(1, 'Monday', 'Algo BSCS-5D', 'R-12', '08:8:50');
 
 -- --------------------------------------------------------
 
@@ -174,7 +227,8 @@ INSERT INTO `user` (`id`, `email`, `password`, `role`) VALUES
 -- Indexes for table `blog`
 --
 ALTER TABLE `blog`
-  ADD PRIMARY KEY (`Bid`);
+  ADD PRIMARY KEY (`Bid`),
+  ADD KEY `post_by` (`post_by`);
 
 --
 -- Indexes for table `carpool`
@@ -188,7 +242,8 @@ ALTER TABLE `carpool`
 --
 ALTER TABLE `course`
   ADD PRIMARY KEY (`cid`),
-  ADD KEY `course_teacher_fk` (`coordinator`);
+  ADD KEY `course_teacher_fk` (`coordinator`),
+  ADD KEY `cid` (`cid`);
 
 --
 -- Indexes for table `project`
@@ -196,6 +251,13 @@ ALTER TABLE `course`
 ALTER TABLE `project`
   ADD PRIMARY KEY (`project_id`),
   ADD KEY `project_user_FK` (`student_id`);
+
+--
+-- Indexes for table `resource`
+--
+ALTER TABLE `resource`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `course_id` (`course_id`,`student_id`);
 
 --
 -- Indexes for table `society`
@@ -212,10 +274,17 @@ ALTER TABLE `teacher`
   ADD PRIMARY KEY (`tid`);
 
 --
+-- Indexes for table `timetable`
+--
+ALTER TABLE `timetable`
+  ADD PRIMARY KEY (`tt_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -225,7 +294,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `blog`
 --
 ALTER TABLE `blog`
-  MODIFY `Bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `carpool`
@@ -240,20 +309,38 @@ ALTER TABLE `project`
   MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `resource`
+--
+ALTER TABLE `resource`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `society`
 --
 ALTER TABLE `society`
-  MODIFY `society_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `society_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `tid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `timetable`
+--
+ALTER TABLE `timetable`
+  MODIFY `tt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `blog`
+--
+ALTER TABLE `blog`
+  ADD CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`post_by`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `carpool`
