@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2022 at 07:46 PM
+-- Generation Time: Dec 02, 2022 at 08:33 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -119,7 +119,6 @@ CREATE TABLE `teacher` (
   `id` int(11) NOT NULL,
   `name` varchar(55) NOT NULL,
   `email` varchar(55) NOT NULL,
-  `course_id` varchar(10) NOT NULL,
   `location` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -127,9 +126,9 @@ CREATE TABLE `teacher` (
 -- Dumping data for table `teacher`
 --
 
-INSERT INTO `teacher` (`id`, `name`, `email`, `course_id`, `location`) VALUES
-(1, 'Amin Sadiq', 'amin.sadiq@nu.edu.pk', 'CS2001', 'CS Building, First Floor, Faculty Room'),
-(2, 'Danish Khan', 'danish.khan@nu.edu.pk', 'CS2002', 'Don\'t go. Run away while you can!');
+INSERT INTO `teacher` (`id`, `name`, `email`, `location`) VALUES
+(1, 'Amin Sadiq', 'amin.sadiq@nu.edu.pk', 'CS Building, First Floor, Faculty Room'),
+(2, 'Danish Khan', 'danish.khan@nu.edu.pk', 'Don\'t go. Run away while you can!');
 
 -- --------------------------------------------------------
 
@@ -173,7 +172,8 @@ ALTER TABLE `carpool`
 -- Indexes for table `course`
 --
 ALTER TABLE `course`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `course_teacher_fk` (`coordinator`);
 
 --
 -- Indexes for table `project`
@@ -186,8 +186,7 @@ ALTER TABLE `project`
 -- Indexes for table `teacher`
 --
 ALTER TABLE `teacher`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `teacher_course_fk` (`course_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
@@ -234,16 +233,16 @@ ALTER TABLE `carpool`
   ADD CONSTRAINT `carpool_user_FK` FOREIGN KEY (`captain_id`) REFERENCES `user` (`id`);
 
 --
+-- Constraints for table `course`
+--
+ALTER TABLE `course`
+  ADD CONSTRAINT `course_teacher_fk` FOREIGN KEY (`coordinator`) REFERENCES `teacher` (`id`);
+
+--
 -- Constraints for table `project`
 --
 ALTER TABLE `project`
   ADD CONSTRAINT `project_user_FK` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`);
-
---
--- Constraints for table `teacher`
---
-ALTER TABLE `teacher`
-  ADD CONSTRAINT `teacher_course_fk` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
