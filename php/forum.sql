@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2022 at 08:52 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.0.25
+-- Generation Time: Dec 02, 2022 at 08:33 PM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,14 +33,16 @@ CREATE TABLE `blog` (
   `post_by` varchar(7) NOT NULL,
   `date_of_post` date NOT NULL DEFAULT current_timestamp(),
   `description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `blog`
 --
 
 INSERT INTO `blog` (`Bid`, `Heading`, `post_by`, `date_of_post`, `description`) VALUES
-(1, 'Bilal is an idiot', 'k200397', '2022-12-01', 'Why bilal is an idiot');
+(1, 'Lorem Ipsum', 'k200397', '2022-12-01', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla pretium mi a volutpat. Phasellus sed enim vitae justo feugiat venenatis at id purus. Aenean eros felis, egestas eget fringilla ac, fringilla vitae lectus. Nullam tincidunt at urna eu '),
+(2, 'Lorem ipsum', 'k200434', '2022-12-03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla pretium mi a volutpat. Phasellus sed enim vitae justo feugiat venenatis at id purus. Aenean eros felis, egestas eget fringilla ac, fringilla vitae lectus. Nullam tincidunt at urna eu '),
+(3, 'Lorem ipsum', 'k200434', '2022-12-03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla pretium mi a volutpat. Phasellus sed enim vitae justo feugiat venenatis at id purus. Aenean eros felis, egestas eget fringilla ac, fringilla vitae lectus. Nullam tincidunt at urna eu ');
 
 -- --------------------------------------------------------
 
@@ -57,7 +59,7 @@ CREATE TABLE `carpool` (
   `phoneNo` varchar(20) NOT NULL,
   `time` varchar(10) NOT NULL,
   `day` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `carpool`
@@ -75,16 +77,16 @@ INSERT INTO `carpool` (`carpool_id`, `pick_up`, `drop_off`, `route`, `captain_id
 --
 
 CREATE TABLE `course` (
-  `cid` varchar(10) NOT NULL,
-  `cname` varchar(55) NOT NULL,
+  `id` varchar(10) NOT NULL,
+  `name` varchar(55) NOT NULL,
   `coordinator` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `course`
 --
 
-INSERT INTO `course` (`cid`, `cname`, `coordinator`) VALUES
+INSERT INTO `course` (`id`, `name`, `coordinator`) VALUES
 ('CS2001', 'Algorithms', 1),
 ('CS2002', 'Database Systems', 2);
 
@@ -100,7 +102,7 @@ CREATE TABLE `project` (
   `student_id` varchar(7) NOT NULL,
   `date_of_post` date NOT NULL,
   `github_link` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `project`
@@ -112,38 +114,45 @@ INSERT INTO `project` (`project_id`, `course_id`, `student_id`, `date_of_post`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `society`
---
-
-CREATE TABLE `society` (
-  `society_id` int(11) NOT NULL,
-  `sname` varchar(15) NOT NULL,
-  `sdescription` varchar(50) NOT NULL,
-  `head_id` int(11) NOT NULL,
-  `president_id` varchar(7) NOT NULL,
-  `socialMedia_link` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `teacher`
 --
 
 CREATE TABLE `teacher` (
-  `tid` int(11) NOT NULL,
-  `tname` varchar(55) NOT NULL,
+  `id` int(11) NOT NULL,
+  `name` varchar(55) NOT NULL,
   `email` varchar(55) NOT NULL,
   `location` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `teacher`
 --
 
-INSERT INTO `teacher` (`tid`, `tname`, `email`, `location`) VALUES
+INSERT INTO `teacher` (`id`, `name`, `email`, `location`) VALUES
 (1, 'Amin Sadiq', 'amin.sadiq@nu.edu.pk', 'CS Building, First Floor, Faculty Room'),
-(2, 'Danish Khan', 'danish.khan@nu.edu.pk', 'Don\'t go. Run away while you can!');
+(2, 'Danish Khan', 'danish.khan@nu.edu.pk', 'Don\'t go. Run away while you can!'),
+(3, 'Abdul Bari', 'abdul.bari@nu.edu.pk', 'EE First floor, Faculty Offices');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `timetable`
+--
+
+CREATE TABLE `timetable` (
+  `tt_id` int(11) NOT NULL,
+  `ttday` varchar(10) NOT NULL,
+  `tcode` varchar(20) NOT NULL,
+  `croom` varchar(10) NOT NULL,
+  `timeslot` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `timetable`
+--
+
+INSERT INTO `timetable` (`tt_id`, `ttday`, `tcode`, `croom`, `timeslot`) VALUES
+(1, 'Monday', 'Algo BSCS-5D', 'R-12', '08:8:50');
 
 -- --------------------------------------------------------
 
@@ -156,7 +165,7 @@ CREATE TABLE `user` (
   `email` varchar(17) NOT NULL,
   `password` varchar(55) NOT NULL,
   `role` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
@@ -174,7 +183,8 @@ INSERT INTO `user` (`id`, `email`, `password`, `role`) VALUES
 -- Indexes for table `blog`
 --
 ALTER TABLE `blog`
-  ADD PRIMARY KEY (`Bid`);
+  ADD PRIMARY KEY (`Bid`),
+  ADD KEY `post_by` (`post_by`);
 
 --
 -- Indexes for table `carpool`
@@ -187,7 +197,7 @@ ALTER TABLE `carpool`
 -- Indexes for table `course`
 --
 ALTER TABLE `course`
-  ADD PRIMARY KEY (`cid`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `course_teacher_fk` (`coordinator`);
 
 --
@@ -198,24 +208,17 @@ ALTER TABLE `project`
   ADD KEY `project_user_FK` (`student_id`);
 
 --
--- Indexes for table `society`
---
-ALTER TABLE `society`
-  ADD PRIMARY KEY (`society_id`),
-  ADD KEY `society_president_user_FK` (`president_id`),
-  ADD KEY `project_course_FK` (`head_id`);
-
---
 -- Indexes for table `teacher`
 --
 ALTER TABLE `teacher`
-  ADD PRIMARY KEY (`tid`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -240,20 +243,20 @@ ALTER TABLE `project`
   MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `society`
---
-ALTER TABLE `society`
-  MODIFY `society_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `tid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `blog`
+--
+ALTER TABLE `blog`
+  ADD CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`post_by`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `carpool`
@@ -265,20 +268,13 @@ ALTER TABLE `carpool`
 -- Constraints for table `course`
 --
 ALTER TABLE `course`
-  ADD CONSTRAINT `course_teacher_fk` FOREIGN KEY (`coordinator`) REFERENCES `teacher` (`tid`);
+  ADD CONSTRAINT `course_teacher_fk` FOREIGN KEY (`coordinator`) REFERENCES `teacher` (`id`);
 
 --
 -- Constraints for table `project`
 --
 ALTER TABLE `project`
   ADD CONSTRAINT `project_user_FK` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`);
-
---
--- Constraints for table `society`
---
-ALTER TABLE `society`
-  ADD CONSTRAINT `project_course_FK` FOREIGN KEY (`head_id`) REFERENCES `teacher` (`tid`),
-  ADD CONSTRAINT `society_president_user_FK` FOREIGN KEY (`president_id`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
