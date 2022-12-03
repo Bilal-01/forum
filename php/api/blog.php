@@ -41,5 +41,14 @@ switch($method){
         break;
     
     case 'DELETE':
-        
+        $data = json_decode( file_get_contents('php://input') );
+        $Bid = $data;
+        if($db->delete('blog',['Bid','=',$Bid]))
+        {
+            $response = ['status' => 1 , 'message'=>'Success'];
+        }
+        else{
+            $response = ['status' => 0 , 'message'=>'Failure'];
+        }
+        break;
 }
