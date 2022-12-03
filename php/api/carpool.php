@@ -47,5 +47,17 @@ switch($method){
             $response=['status'=>0,'results'=>$results->results(),'message'=>'Failure'];
         }
         echo json_encode($response);
+
+    case 'DELETE':
+        $data = json_decode( file_get_contents('php://input') );
+        $carpool_id = $data;
+            if($db->delete('carpool',['carpool_id','=',$carpool_id]))
+            {
+                $response = ['status' => 1 , 'message'=>'Success'];
+            }
+            else{
+                $response = ['status' => 0 , 'message'=>'Failure'];
+            }
+            break;
         
 }
