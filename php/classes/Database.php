@@ -45,6 +45,20 @@
             $this->_error = true;
             return $this;
         }
+
+        public function complexQuery($sql){
+            $this->error = false;
+            if($this->_query = $this->_pdo->prepare($sql)){
+                if ($this->_query->execute()) {
+                    $this->_results = $this->_query->fetchAll();
+                    $this->_count = count($this->_results);
+                    return $this;
+                } 
+            }
+            $this->_error = true;
+            return $this;
+        }
+
     
         public function action($action, $table, $where = []){
             if (count($where) === 3) {
