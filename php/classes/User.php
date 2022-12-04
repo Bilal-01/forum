@@ -73,13 +73,26 @@ try {
                 $this->sendEmail($email, $password);
                 $result = $this->_db->get('user', ['email', '=', $email]);
                 $id = substr($email, 0, 7);
-                if(!$result->count()){
-                    if($this->_db->insert('user', ['id' => $id, 'email' => $email, 'password' => $password , 'uname' => $name, 'role' => 1])){
-                        return true;
+                try{
+                    
+                    // $this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $this->_db->_pdo->beginTransaction();
+                    if(!$result->count()){
+                        $this->_db->insert('user', ['id' => $id, 'email' => $email, 'password' => $password , 'uname' => $name, 'role' => 1]);
+                        $this->_db->insert('profile',['id' => null, 'full_name' => $name, 'department' => null, 'domain' => null, 'skill' => null, 'about' => null, 'uid' => $id]);
+                        $this->_db->_pdo->commit();
                     }
+                    else{
+                        return false;
+                    }
+                }catch(PDOException $e) {
+                    $this->_db->_pdo->rollback();
+                    echo "Error: " . $e->getMessage();
                 }
             }
-            return false;
+            else{
+                return false;
+            }
         }
 
 
