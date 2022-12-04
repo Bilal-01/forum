@@ -2,13 +2,9 @@
 
     // require_once    ('../PHPMailer-master/class.phpmailer.php');
     // require_once    ('../PHPMailer-master/class.smtp.php');
-    // require __DIR__ . 'includes/PHPMailer.php';
-    // require __DIR__ . 'includes/SMTP.php';
-    // require __DIR__ . 'includes/Exception.php';
-
     use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
+    require 'vendor/autoload.php';
 
     class User{
 
@@ -52,23 +48,25 @@
 
             // $result = mail($to, $subject, $message, $headers);
 
+            var_dump($email);
+            
             $mail               = new PHPMailer();
-            // $body               = "<h1> Sending HTML Mails using gmail</h1><p>it's great !!</p>";
+            $body               = "<h1> Sending HTML Mails using gmail</h1><p>it's great !!</p>";
             $mail->IsSMTP();                                        // telling the class to use SMTP
             $mail->SMTPDebug    = 1;                                // enables SMTP debug information (for testing)
-            $mail->SMTPAuth     = "true";                             // enable SMTP authentication
+            $mail->SMTPAuth     = true;                             // enable SMTP authentication
             $mail->SMTPSecure   = "tls";                            // sets the prefix to the servier
             $mail->Host         = "smtp.gmail.com";                 // sets GMAIL as the SMTP server
             $mail->Port         = 587;                              // set the SMTP port for the GMAIL server
 
             $mail->Username     = "fastdirectory01@gmail.com"  ;           // GMAIL username
-            $mail->Password     = 'jdtbtedvetueorcx' ;           // GMAIL password
+            $mail->Password     = 'Fast@1234' ;           // GMAIL password
 
-            $mail->SetFrom('fastdirectory01@gmail.com');
+            $mail->SetFrom('VALID_USER@gmail.com', 'Anis Halayem');
             $mail->Subject    = "Test Send Mails";
-            $mail->Body = "Test mail hooho";
+            $mail->MsgHTML($body);
             $address = $email;
-            $mail->AddAddress($address);
+            $mail->AddAddress($address, "USER NAME");
 
             // $mail->AddAttachment("images/phpmailer.gif");        // attachment
             // $mail->AddAttachment("images/phpmailer_mini.gif");   // attachment
@@ -84,7 +82,7 @@
 
         }
 
-        public function register($email)
+        public function register($email,$name)
         {
             if(explode('@', $email)[1] === 'nu.edu.pk'){
                 $password = substr($email, 0, 7);
@@ -93,8 +91,9 @@
                 $password = $password . $rnumber;
                 $this->sendEmail($email, $password);
                 $result = $this->_db->get('user', ['email', '=', $email]);
+                $id = substr($email, 0, 7);
                 if(!$result->count()){
-                    if($this->_db->insert('user', ['id' => null, 'email' => $email, 'password' => $password])){
+                    if($this->_db->insert('user', ['id' => $id, 'email' => $email, 'password' => $password , 'uname' => $name, 'role' => 1])){
                         return true;
                     }
                 }
