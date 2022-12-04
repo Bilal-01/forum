@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2022 at 04:54 PM
+-- Generation Time: Dec 04, 2022 at 06:19 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -125,11 +125,13 @@ CREATE TABLE `profile` (
   `quote` varchar(55) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `profile`
+--
+
 INSERT INTO `profile` (`id`, `full_name`, `department`, `domain`, `skill`, `about`, `uid`, `quote`) VALUES
 (1, 'Mohammad Bilal Aziz', 'Computer Science', 'Web Development', 'Frontend Development', 'It is not despair, for despair is only for those who see the end beyond all doubt. We do not\r\nYou shall not pass\r\nGomen nasai oni chan', 'k200397', 'I was talking aloud to myself. A habit of the old: they'),
 (3, 'Maryam Siddiqui', 'Computer Science', 'Web Development', 'Emotional Blackmail', 'Very good at using superpowers', 'k200434', 'I was talking aloud to myself. A habit of the old: they');
-
-
 
 -- --------------------------------------------------------
 
@@ -381,7 +383,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `profile`
 --
 ALTER TABLE `profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `project`
@@ -411,7 +413,7 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `timetable`
 --
 ALTER TABLE `timetable`
-  MODIFY `tt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -427,46 +429,46 @@ ALTER TABLE `blog`
 -- Constraints for table `carpool`
 --
 ALTER TABLE `carpool`
-  ADD CONSTRAINT `carpool_user_FK` FOREIGN KEY (`captain_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `carpool_user_FK` FOREIGN KEY (`captain_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `course`
 --
 ALTER TABLE `course`
-  ADD CONSTRAINT `course_teacher_fk` FOREIGN KEY (`coordinator`) REFERENCES `teacher` (`tid`);
+  ADD CONSTRAINT `course_teacher_fk` FOREIGN KEY (`coordinator`) REFERENCES `teacher` (`tid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `events`
 --
 ALTER TABLE `events`
-  ADD CONSTRAINT `event_society_FK` FOREIGN KEY (`sid`) REFERENCES `society` (`society_id`);
+  ADD CONSTRAINT `event_society_FK` FOREIGN KEY (`sid`) REFERENCES `society` (`society_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `profile`
 --
 ALTER TABLE `profile`
-  ADD CONSTRAINT `user_profile_FK` FOREIGN KEY (`uid`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `user_profile_FK` FOREIGN KEY (`uid`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `project`
 --
 ALTER TABLE `project`
-  ADD CONSTRAINT `project_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`cid`),
-  ADD CONSTRAINT `project_user_FK` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `project_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`cid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `project_user_FK` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `resource`
 --
 ALTER TABLE `resource`
   ADD CONSTRAINT `resource_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`cid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `resource_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `resource_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `society`
 --
 ALTER TABLE `society`
-  ADD CONSTRAINT `project_head_FK` FOREIGN KEY (`head_id`) REFERENCES `teacher` (`tid`),
-  ADD CONSTRAINT `society_president_user_FK` FOREIGN KEY (`president_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `project_head_FK` FOREIGN KEY (`head_id`) REFERENCES `teacher` (`tid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `society_president_user_FK` FOREIGN KEY (`president_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
