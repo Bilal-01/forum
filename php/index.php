@@ -28,7 +28,8 @@
                 }
             }
             else if($user->login($data->email, $data->password)){
-                $response = ['status' => 1, 'message' => 'Login successfull.', 'user' => $data];
+                $userData = $db->get('user', ['email', '=', $data->email])->first();
+                $response = ['status' => 1, 'message' => 'Login successfull.', 'user' => $userData];
             }
             else{
                 $response = ['status' => 0, 'message' => 'Incorrect email / password.'];
