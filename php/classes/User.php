@@ -2,7 +2,13 @@
 
     // require_once    ('../PHPMailer-master/class.phpmailer.php');
     // require_once    ('../PHPMailer-master/class.smtp.php');
+    // require __DIR__ . 'includes/PHPMailer.php';
+    // require __DIR__ . 'includes/SMTP.php';
+    // require __DIR__ . 'includes/Exception.php';
 
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
 
     class User{
 
@@ -46,25 +52,23 @@
 
             // $result = mail($to, $subject, $message, $headers);
 
-            var_dump($email);
-            
             $mail               = new PHPMailer();
-            $body               = "<h1> Sending HTML Mails using gmail</h1><p>it's great !!</p>";
+            // $body               = "<h1> Sending HTML Mails using gmail</h1><p>it's great !!</p>";
             $mail->IsSMTP();                                        // telling the class to use SMTP
             $mail->SMTPDebug    = 1;                                // enables SMTP debug information (for testing)
-            $mail->SMTPAuth     = true;                             // enable SMTP authentication
+            $mail->SMTPAuth     = "true";                             // enable SMTP authentication
             $mail->SMTPSecure   = "tls";                            // sets the prefix to the servier
             $mail->Host         = "smtp.gmail.com";                 // sets GMAIL as the SMTP server
             $mail->Port         = 587;                              // set the SMTP port for the GMAIL server
 
             $mail->Username     = "fastdirectory01@gmail.com"  ;           // GMAIL username
-            $mail->Password     = 'Fast@1234' ;           // GMAIL password
+            $mail->Password     = 'jdtbtedvetueorcx' ;           // GMAIL password
 
-            $mail->SetFrom('VALID_USER@gmail.com', 'Anis Halayem');
+            $mail->SetFrom('fastdirectory01@gmail.com');
             $mail->Subject    = "Test Send Mails";
-            $mail->MsgHTML($body);
+            $mail->Body = "Test mail hooho";
             $address = $email;
-            $mail->AddAddress($address, "USER NAME");
+            $mail->AddAddress($address);
 
             // $mail->AddAttachment("images/phpmailer.gif");        // attachment
             // $mail->AddAttachment("images/phpmailer_mini.gif");   // attachment
@@ -76,6 +80,7 @@
                 echo "Message sent!";
             }
 
+            $mail->smtpClose();
 
         }
 
