@@ -46,7 +46,8 @@
 
             // $result = mail($to, $subject, $message, $headers);
 
-
+            var_dump($email);
+            
             $mail               = new PHPMailer();
             $body               = "<h1> Sending HTML Mails using gmail</h1><p>it's great !!</p>";
             $mail->IsSMTP();                                        // telling the class to use SMTP
