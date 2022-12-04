@@ -1,14 +1,10 @@
 <?php
 
-    // require_once    ('../PHPMailer-master/class.phpmailer.php');
-    // require_once    ('../PHPMailer-master/class.smtp.php');
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
     require 'vendor/autoload.php';
 
     class User{
-
-        
 
         private 
             $_isLoggedIn,
@@ -40,29 +36,29 @@
         public function sendEmail($email, $password){
             $mail = new PHPMailer(true);
   
-try {
-    $mail->SMTPDebug = 2;                                       
-    $mail->isSMTP();                                
-    $mail->Host       = 'smtp.gmail.com'   ;                 
-    $mail->SMTPAuth   = true;                             
-    $mail->Username   = 'fastdirectory01@gmail.com';                 
-    $mail->Password   = 'jdtbtedvetueorcx';                        
-    $mail->SMTPSecure = 'tls';                              
-    $mail->Port       = 587;  
-  
-    $mail->setFrom('fastdirectory01@gmail.com', 'Fast Directory');           
-    $mail->addAddress($email);
-       
-    $mail->isHTML(true);                                  
-    $mail->Subject = 'Subject';
-    $mail->Body    = 'Email: <b>' .$email. '</b><br/>Password: <b>' .$password. '</b>';
-    
-    $mail->AltBody = 'Body in plain text for non-HTML mail clients';
-    $mail->send();
-    echo "Mail has been sent successfully!";
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}
+            try {
+                $mail->SMTPDebug = 2;                                       
+                $mail->isSMTP();                                
+                $mail->Host       = 'smtp.gmail.com'   ;                 
+                $mail->SMTPAuth   = true;                             
+                $mail->Username   = 'fastdirectory01@gmail.com';                 
+                $mail->Password   = 'jdtbtedvetueorcx';                        
+                $mail->SMTPSecure = 'tls';                              
+                $mail->Port       = 587;  
+            
+                $mail->setFrom('fastdirectory01@gmail.com', 'Fast Directory');           
+                $mail->addAddress($email);
+                
+                $mail->isHTML(true);                                  
+                $mail->Subject = 'Subject';
+                $mail->Body    = 'Email: <b>' .$email. '</b><br/>Password: <b>' .$password. '</b>';
+                
+                $mail->AltBody = 'Body in plain text for non-HTML mail clients';
+                $mail->send();
+                echo "Mail has been sent successfully!";
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
 
 
         }
