@@ -144,10 +144,13 @@
                 }
                 $x++;
             }
-            $sql = "UPDATE {$table} SET {$set} WHERE id = {$user_id}";
+            $sql = "UPDATE {$table} SET {$set} WHERE `uid` = '{$user_id}'";
+            // echo'<pre>';
+            // var_dump($sql);
+            // echo '</pre>';
             
             if (!$this->query($sql, $fields)->error()){
-                return $this;
+                return true;
             }
             return false;
         }
@@ -160,7 +163,7 @@
             return $this->_error;
         }
     
-        public function results(){
+        public function results(){  
             return $this->_results;
         }
     
