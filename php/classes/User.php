@@ -1,7 +1,4 @@
 <?php
-
-    // require_once    ('../PHPMailer-master/class.phpmailer.php');
-    // require_once    ('../PHPMailer-master/class.smtp.php');
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
     require 'vendor/autoload.php';
@@ -38,17 +35,6 @@
         }
         
         public function sendEmail($email, $password){
-            // $to = $email;
-            // $from = 'fastdirectory01@gmail.com';
-            // $subject = 'Your Credentials';
-            // $message = 'Congratulations on joining Fast Directory. Welcome to four years of hell! Here is your password: ' . $password;
-            // $headers = "MIME-Version: 1.0" . "\r\n";
-            // $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            // $headers .= 'From: ' . $from . '<' . $from . '>' . "\r\n" . "Reply-To: " . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-
-            // $result = mail($to, $subject, $message, $headers);
-
-            var_dump($email);
             
             $mail               = new PHPMailer();
             $body               = "<h1> Sending HTML Mails using gmail</h1><p>it's great !!</p>";
@@ -67,9 +53,6 @@
             $mail->MsgHTML($body);
             $address = $email;
             $mail->AddAddress($address, "USER NAME");
-
-            // $mail->AddAttachment("images/phpmailer.gif");        // attachment
-            // $mail->AddAttachment("images/phpmailer_mini.gif");   // attachment
 
             if(!$mail->Send()) {
                 echo "Mailer Error: " . $mail->ErrorInfo;
