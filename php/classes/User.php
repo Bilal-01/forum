@@ -35,33 +35,32 @@
         }
         
         public function sendEmail($email, $password){
+            $mail = new PHPMailer(true);
+  
+            try {
+                $mail->SMTPDebug = 2;                                       
+                $mail->isSMTP();                                
+                $mail->Host       = 'smtp.gmail.com'   ;                 
+                $mail->SMTPAuth   = true;                             
+                $mail->Username   = 'fastdirectory01@gmail.com';                 
+                $mail->Password   = 'jdtbtedvetueorcx';                        
+                $mail->SMTPSecure = 'tls';                              
+                $mail->Port       = 587;  
             
-            $mail               = new PHPMailer();
-            $body               = "<h1> Sending HTML Mails using gmail</h1><p>it's great !!</p>";
-            $mail->IsSMTP();                                        // telling the class to use SMTP
-            $mail->SMTPDebug    = 1;                                // enables SMTP debug information (for testing)
-            $mail->SMTPAuth     = true;                             // enable SMTP authentication
-            $mail->SMTPSecure   = "tls";                            // sets the prefix to the servier
-            $mail->Host         = "smtp.gmail.com";                 // sets GMAIL as the SMTP server
-            $mail->Port         = 587;                              // set the SMTP port for the GMAIL server
-
-            $mail->Username     = "fastdirectory01@gmail.com"  ;           // GMAIL username
-            $mail->Password     = 'Fast@1234' ;           // GMAIL password
-
-            $mail->SetFrom('VALID_USER@gmail.com', 'Anis Halayem');
-            $mail->Subject    = "Test Send Mails";
-            $mail->MsgHTML($body);
-            $address = $email;
-            $mail->AddAddress($address, "USER NAME");
-
-            if(!$mail->Send()) {
-                echo "Mailer Error: " . $mail->ErrorInfo;
-            } 
-            else {
-                echo "Message sent!";
+                $mail->setFrom('fastdirectory01@gmail.com', 'Fast Directory');           
+                $mail->addAddress($email);
+                
+                $mail->isHTML(true);                                  
+                $mail->Subject = 'Subject';
+                $mail->Body    = 'Email: <b>' .$email. '</b><br/>Password: <b>' .$password. '</b>';
+                
+                $mail->AltBody = 'Body in plain text for non-HTML mail clients';
+                $mail->send();
+                echo "Mail has been sent successfully!";
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
 
-            $mail->smtpClose();
 
         }
 

@@ -145,10 +145,6 @@
                 $x++;
             }
             $sql = "UPDATE {$table} SET {$set} WHERE `uid` = '{$user_id}'";
-            // echo'<pre>';
-            // var_dump($sql);
-            // echo '</pre>';
-            
             if (!$this->query($sql, $fields)->error()){
                 return $this;
             }
