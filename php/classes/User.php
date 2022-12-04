@@ -67,7 +67,7 @@ try {
 
         }
 
-        public function register($email)
+        public function register($email,$name)
         {
             if(explode('@', $email)[1] === 'nu.edu.pk'){
                 $password = substr($email, 0, 7);
@@ -76,8 +76,9 @@ try {
                 $password = $password . $rnumber;
                 $this->sendEmail($email, $password);
                 $result = $this->_db->get('user', ['email', '=', $email]);
+                $id = substr($email, 0, 7);
                 if(!$result->count()){
-                    if($this->_db->insert('user', ['id' => null, 'email' => $email, 'password' => $password])){
+                    if($this->_db->insert('user', ['id' => $id, 'email' => $email, 'password' => $password , 'uname' => $name, 'role' => 1])){
                         return true;
                     }
                 }

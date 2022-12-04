@@ -21,7 +21,7 @@
             $data = json_decode( file_get_contents('php://input') );
             // var_dum($data);
             if($data->password === ''){
-                if($user->register($data->email)){
+                if($user->register($data->email, $data->name)){
                     $response = ['status' => 1, 'message' => 'User successfully registered'];
                 }
                 else{
