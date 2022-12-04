@@ -2,8 +2,9 @@
 
     class Database{
         private static $_instance = null;
+        public
+            $_pdo;
         private 
-            $_pdo,
             $_query,
             $_results,
             $_error = false,
