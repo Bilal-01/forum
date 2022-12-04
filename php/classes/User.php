@@ -2,7 +2,9 @@
 
     // require_once    ('../PHPMailer-master/class.phpmailer.php');
     // require_once    ('../PHPMailer-master/class.smtp.php');
-
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    require 'vendor/autoload.php';
 
     class User{
 
@@ -36,45 +38,31 @@
         }
         
         public function sendEmail($email, $password){
-            // $to = $email;
-            // $from = 'fastdirectory01@gmail.com';
-            // $subject = 'Your Credentials';
-            // $message = 'Congratulations on joining Fast Directory. Welcome to four years of hell! Here is your password: ' . $password;
-            // $headers = "MIME-Version: 1.0" . "\r\n";
-            // $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            // $headers .= 'From: ' . $from . '<' . $from . '>' . "\r\n" . "Reply-To: " . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion();
-
-            // $result = mail($to, $subject, $message, $headers);
-
-            var_dump($email);
-            
-            $mail               = new PHPMailer();
-            $body               = "<h1> Sending HTML Mails using gmail</h1><p>it's great !!</p>";
-            $mail->IsSMTP();                                        // telling the class to use SMTP
-            $mail->SMTPDebug    = 1;                                // enables SMTP debug information (for testing)
-            $mail->SMTPAuth     = true;                             // enable SMTP authentication
-            $mail->SMTPSecure   = "tls";                            // sets the prefix to the servier
-            $mail->Host         = "smtp.gmail.com";                 // sets GMAIL as the SMTP server
-            $mail->Port         = 587;                              // set the SMTP port for the GMAIL server
-
-            $mail->Username     = "fastdirectory01@gmail.com"  ;           // GMAIL username
-            $mail->Password     = 'Fast@1234' ;           // GMAIL password
-
-            $mail->SetFrom('VALID_USER@gmail.com', 'Anis Halayem');
-            $mail->Subject    = "Test Send Mails";
-            $mail->MsgHTML($body);
-            $address = $email;
-            $mail->AddAddress($address, "USER NAME");
-
-            // $mail->AddAttachment("images/phpmailer.gif");        // attachment
-            // $mail->AddAttachment("images/phpmailer_mini.gif");   // attachment
-
-            if(!$mail->Send()) {
-                echo "Mailer Error: " . $mail->ErrorInfo;
-            } 
-            else {
-                echo "Message sent!";
-            }
+            $mail = new PHPMailer(true);
+  
+try {
+    $mail->SMTPDebug = 2;                                       
+    $mail->isSMTP();                                
+    $mail->Host       = 'smtp.gmail.com'   ;                 
+    $mail->SMTPAuth   = true;                             
+    $mail->Username   = 'fastdirectory01@gmail.com';                 
+    $mail->Password   = 'jdtbtedvetueorcx';                        
+    $mail->SMTPSecure = 'tls';                              
+    $mail->Port       = 587;  
+  
+    $mail->setFrom('fastdirectory01@gmail.com', 'Fast Directory');           
+    $mail->addAddress($email);
+       
+    $mail->isHTML(true);                                  
+    $mail->Subject = 'Subject';
+    $mail->Body    = 'Email: <b>' .$email. '</b><br/>Password: <b>' .$password. '</b>';
+    
+    $mail->AltBody = 'Body in plain text for non-HTML mail clients';
+    $mail->send();
+    echo "Mail has been sent successfully!";
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
 
 
         }
