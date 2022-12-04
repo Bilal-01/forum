@@ -12,7 +12,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch($method){
     case 'POST':
         $data = json_decode(file_get_contents('php://input'));
-        $results = $db->update('profile', ['full_name' => $data->fullName, 'department'=>$data->department, 'skill'=>$data->skill, 'domain'=>$data->skill, 'quote'=>$data->quote, 'about'=>$data->about], $data->uid);
+        $results = $db->update('profile', ['full_name' => $data->fullName, 'department'=>$data->department, 'skill'=>$data->skill, 'domain'=>$data->domain, 'quote'=>$data->quote, 'about'=>$data->about], $data->uid);
         if($results){
             $response = ['status' => 1, 'results' => $results->first(), 'message' => 'Success'];
         }

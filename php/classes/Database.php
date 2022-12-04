@@ -150,7 +150,7 @@
             // echo '</pre>';
             
             if (!$this->query($sql, $fields)->error()){
-                return true;
+                return $this;
             }
             return false;
         }
