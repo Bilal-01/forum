@@ -43,16 +43,16 @@ switch($method){
         }
         echo json_encode($response);
 
-        case 'DELETE':
-            $data = json_decode( file_get_contents('php://input') );
-            $project_id = $data;
-                if($db->delete('project',['project_id','=',$project_id]))
-                {
-                    $response = ['status' => 1 , 'message'=>'Success'];
-                }
-                else{
-                    $response = ['status' => 0 , 'message'=>'Failure'];
-                }
-                break;
+    case 'DELETE':
+        $data = json_decode( file_get_contents('php://input') );
+        $project_id = $data;
+        if($db->delete('project',['project_id','=',$project_id]))
+        {
+            $response = ['status' => 1 , 'message'=>'Success'];
+        }
+        else{
+            $response = ['status' => 0 , 'message'=>'Failure'];
+        }
+        break;
         
 }
