@@ -66,9 +66,7 @@ CREATE TABLE `carpool` (
 --
 
 INSERT INTO `carpool` (`carpool_id`, `pick_up`, `drop_off`, `route`, `captain_id`, `phoneNo`, `time`, `day`) VALUES
-(1, 'Federal B Area', 'Fast', 'F.b.Area->Fast', 'k200397', '03201348083', '8:00', 'Monday'),
-(27, 'karimabad', 'fast', 'karimabad->fast', 'K200434', '1344', '2022-12-02', 'Monday'),
-(28, 'karimabad', 'fast', 'karimabad->fast', 'K200434', '1344', '2022-12-02', 'Monday');
+(30, 'karimabad', 'fast', 'karimabad->fast', 'k200434', '123434689', '06:38', 'Monday');
 
 -- --------------------------------------------------------
 
@@ -146,7 +144,7 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`project_id`, `course_id`, `student_id`, `date_of_post`, `github_link`) VALUES
-(1, 'CS2001', 'k200397', '2022-12-02', 'github.com/xyz');
+(16, 'CS2002', 'k200434', '2022-12-04', 'www.github.com/453');
 
 -- --------------------------------------------------------
 
@@ -191,7 +189,14 @@ CREATE TABLE `society` (
 
 INSERT INTO `society` (`society_id`, `sname`, `sdescription`, `head_id`, `president_id`, `socialMedia_link`) VALUES
 (1, 'Dramatic and Extra Curricular Society', 'DECS has always been on the go in planning extra-activities such as picnics for the FASTians which prove to be both exhilarating and exclusive', 1, 'k200397', 'https://www.facebook.com/decsfast/'),
-(2, 'The Literary Club', 'TLC is the most active, the most happening and the most classy society at FAST. With events like Xpressions, Zauq, Agha Hasan Abedi Declamation Contest, Intra-MUN, Parliamentary Debates and an annual magazine called the localhost', 1, 'k200397', 'https://www.facebook.com/TLCFAST/');
+(2, 'The Literary Club', 'TLC is the most active, the most happening and the most classy society at FAST. With events like Xpressions, Zauq, Agha Hasan Abedi Declamation Contest, Intra-MUN, Parliamentary Debates and an annual magazine called the localhost', 1, 'k200397', 'https://www.facebook.com/TLCFAST/'),
+(3, 'FAST DataScience Society', 'You don\'t know where to start from? or the platforms are too complicated?\r\nDon\'t have to be stressed out, as we are all set to provide You with the mentorship that You need. \r\nWith the vision and mission of providing a platform, and mentoring students into leading individuals of #DataIndulgingMysteries FAST Data Science Society', 1, 'k200434', 'https://www.facebook.com/profile.php?id=100086255005453'),
+(4, 'Association for Computing Machinery', 'The ACM Student Chapter at FAST-NUCES Karachi Campus is dedicated to the promotion of computing education, research and development.At ACM-NUCES KHI Chapter. You join a team that aims to change the methodology with which students approach computing and technology.', 2, 'k200434', 'https://www.facebook.com/acmnuce'),
+(5, 'Think N Create', 'The objective of the committee is to develop within students, skill sets related to the industry.\r\n          They shall be introduced to the current technical, managerial, ethical aspects of expertise in use or desired.', 3, 'k200397', 'https://www.facebook.com/tncfast'),
+(6, 'Association for Computing Machinery - Women', 'ACM-W supports, celebrates, and advocates internationally for the full engagement of women in all aspects of the computing field, providing a wide range of programs and services to ACM members and working in the larger community to advance the contributions of technical women.', 2, 'k200397', 'https://www.facebook.com/acmw.nuceskhi'),
+(7, 'Character Building Society', 'We, at CBS, help students to improve themselves by showing better character and enable them to know & act on their responsibilities in different life roles.', 3, 'k200434', 'https://www.facebook.com/CBSfastkhi\"\r\n'),
+(8, 'FAST Management Society', 'FMS is a society founded by the BBA Department. Our main objective is to evince better management skills in the real world job environment. We solely focus on our undergrads, as our goal is for every individual.', 3, 'k200434', 'https://www.facebook.com/28606FMS/'),
+(9, 'Google Developer Students Club', 'Google Developer Student Clubs (GDSC) are community groups for college and university students interested in Google developer technologies. Students from all undergraduate or graduate programs with an interest in growing as a developer are welcome', 2, 'k200434', 'https://www.facebook.com/dscnuces/');
 
 -- --------------------------------------------------------
 
@@ -234,8 +239,10 @@ CREATE TABLE `timetable` (
 --
 
 INSERT INTO `timetable` (`tt_id`, `ttday`, `tcode`, `croom`, `timeslot`) VALUES
-(1, 'Monday', 'Algo BSCS-5D', 'R-12', '08:8:50'),
-(2, 'Monday', 'DB BSCS-5D', 'R-109', '08:55-09:4');
+(1, 'Monday', 'Algo BSCS-5D', 'R-12', '08:00-08:50'),
+(2, 'Monday', 'DB BSCS-5D', 'R-109', '08:55-09:40'),
+(3, 'Tuesday', 'SDA BSCS-5D', 'E-3', '10:45-11:35'),
+(4, 'Tuesday', 'PDC BSCS-5D', 'E-3', '12:35-01:25');
 
 -- --------------------------------------------------------
 
@@ -356,7 +363,7 @@ ALTER TABLE `blog`
 -- AUTO_INCREMENT for table `carpool`
 --
 ALTER TABLE `carpool`
-  MODIFY `carpool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `carpool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -374,7 +381,7 @@ ALTER TABLE `profile`
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `resource`
@@ -386,7 +393,7 @@ ALTER TABLE `resource`
 -- AUTO_INCREMENT for table `society`
 --
 ALTER TABLE `society`
-  MODIFY `society_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `society_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `teacher`
