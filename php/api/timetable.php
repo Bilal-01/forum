@@ -40,7 +40,7 @@ switch($method){
     case 'DELETE':
         $data = json_decode( file_get_contents('php://input') );
         $ttid = $data;
-        if($db->delete('blog',['ttid','=',$ttid]))
+        if($db->delete('timetable',['ttid','=',$ttid]))
         {
             $response = ['status' => 1 , 'message'=>'Success'];
         }

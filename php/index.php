@@ -10,12 +10,6 @@
     $user = new User();
     $method = $_SERVER['REQUEST_METHOD'];
     switch($method) {
-        case "GET":
-            $users = (file_get_contents('php://input'));
-            $db->get('user', ['id', '=', 1]);
-
-            echo json_encode($users);
-            break;
 
         case "POST":
             $data = json_decode( file_get_contents('php://input') );

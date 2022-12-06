@@ -38,7 +38,7 @@ switch($method){
     case 'DELETE':
         $data = json_decode( file_get_contents('php://input') );
         $sid = $data;
-        if($db->delete('blog',['society_id','=',$sid]))
+        if($db->delete('society',['society_id','=',$sid]))
         {
             $response = ['status' => 1 , 'message'=>'Success'];
         }

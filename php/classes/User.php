@@ -76,6 +76,7 @@
                     // $this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $this->_db->_pdo->beginTransaction();
                     if(!$result->count()){
+                        echo 'Inside query';
                         $this->_db->insert('user', ['id' => $id, 'email' => $email, 'password' => $password , 'uname' => $name, 'role' => 1]);
                         $this->_db->insert('profile',['id' => null, 'full_name' => $name, 'department' => null, 'domain' => null, 'skill' => null, 'about' => null, 'uid' => $id]);
                         $this->_db->_pdo->commit();
@@ -90,6 +91,42 @@
             }
             else{
                 return false;
+            }
+        }
+
+        public function getAll(){
+            $res = $this->_db->get('user', ['role', '>=', 0]);
+            if($res->count()){
+                return $res;
+            }
+            return null;
+        }
+
+        public function sendQuery($data){
+            $mail = new PHPMailer(true);
+            
+            try {
+                $mail->SMTPDebug = 2;                                       
+                $mail->isSMTP();                                
+                $mail->Host       = 'smtp.gmail.com'   ;                 
+                $mail->SMTPAuth   = true;                             
+                $mail->Username   = 'fastdirectory01@gmail.com';                 
+                $mail->Password   = 'jdtbtedvetueorcx';                        
+                $mail->SMTPSecure = 'tls';                              
+                $mail->Port       = 587;  
+            
+                $mail->setFrom('fastdirectory01@gmail.com', 'Fast Directory');           
+                $mail->addAddress('k200397@nu.edu.pk');
+                
+                $mail->isHTML(true);                                  
+                $mail->Subject = $data->subject;
+                $mail->Body    = $data->message;
+                
+                $mail->AltBody = 'Body in plain text for non-HTML mail clients';
+                $mail->send();
+                echo "Mail has been sent successfully!";
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
         }
 
