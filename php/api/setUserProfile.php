@@ -9,12 +9,13 @@ require_once '../classes/Database.php';
 $db = Database::getInstance();
 $method = $_SERVER['REQUEST_METHOD'];
 
-switch($method){
+switch($method)
+{
+
     case 'POST':
         $data = json_decode(file_get_contents('php://input'));
-        
-        $results = $db->update('profile', ['full_name' => $data->fullName, 'department'=>$data->department, 'skill'=>$data->skill, 'domain'=>$data->domain, 'quote'=>$data->quote, 'about'=>$data->about], $data->uid);
-        if($results){
+        $results = $db->get('profile', ['uid', '=', $data->uid]);
+        if($results->count()){
             $response = ['status' => 1, 'results' => $results->first(), 'message' => 'Success'];
         }
         else{
