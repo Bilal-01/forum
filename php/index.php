@@ -18,7 +18,7 @@
                     $response = ['status' => 1, 'message' => 'User successfully registered'];
                 }
                 else{
-                    $response = ['status' => 0, 'message' => 'User cannot be registered'];
+                    $response = ['status' => 0, 'message' => 'Either email exists or invalid email'];
                 }
             }
             else if($user->login($data->email, $data->password)){
