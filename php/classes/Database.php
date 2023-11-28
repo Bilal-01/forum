@@ -8,7 +8,8 @@
             $_query,
             $_results,
             $_error = false,
-            $_count = 0;
+            $_count = 0,
+            $_errorMessage = '';
         
         private function __construct(){
             try {
@@ -47,19 +48,44 @@
             return $this;
         }
 
-        public function complexQuery($sql){
+        // public function complexQuery($sql){
+        //     $this->error = false;
+        //     if($this->_query = $this->_pdo->prepare($sql)){
+        //         if ($this->_query->execute()) {
+        //             $this->_results = $this->_query->fetchAll();
+        //             $this->_count = count($this->_results);
+        //             return $this;
+        //         } 
+        //     }
+        //     $this->_error = true;
+        //     return $this;
+        // }
+        public function complexQuery($sql, $params = []){
             $this->error = false;
             if($this->_query = $this->_pdo->prepare($sql)){
-                if ($this->_query->execute()) {
+                if ($this->_query->execute($params)) {
                     $this->_results = $this->_query->fetchAll();
                     $this->_count = count($this->_results);
                     return $this;
+                } else {
+                    $this->_error = true;
+                    $this->_errorMessage = $this->_query->errorInfo();
+                    return $this;
                 } 
+            } else {
+                $this->_error = true;
+                $this->_errorMessage = $this->_pdo->errorInfo();
+                return $this;
             }
-            $this->_error = true;
-            return $this;
         }
-    
+       
+        public function errorMessage() {
+            return $this->_errorMessage;
+        }
+              
+       
+         
+         
         public function action($action, $table, $where = []){
             if (count($where) === 3) {
                 $operators = ['!=', '=', '>', '<', '<=', '>='];

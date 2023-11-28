@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2022 at 06:19 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.0.25
+-- Generation Time: Nov 28, 2023 at 12:59 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `blog` (
   `post_by` varchar(7) NOT NULL,
   `date_of_post` date NOT NULL DEFAULT current_timestamp(),
   `description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `blog`
@@ -43,6 +43,32 @@ INSERT INTO `blog` (`Bid`, `Heading`, `post_by`, `date_of_post`, `description`) 
 (1, 'Lorem Ipsum', 'k200397', '2022-12-01', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla pretium mi a volutpat. Phasellus sed enim vitae justo feugiat venenatis at id purus. Aenean eros felis, egestas eget fringilla ac, fringilla vitae lectus. Nullam tincidunt at urna eu '),
 (2, 'Lorem ipsum', 'k200434', '2022-12-03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla pretium mi a volutpat. Phasellus sed enim vitae justo feugiat venenatis at id purus. Aenean eros felis, egestas eget fringilla ac, fringilla vitae lectus. Nullam tincidunt at urna eu '),
 (3, 'Lorem ipsum', 'k200434', '2022-12-03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla pretium mi a volutpat. Phasellus sed enim vitae justo feugiat venenatis at id purus. Aenean eros felis, egestas eget fringilla ac, fringilla vitae lectus. Nullam tincidunt at urna eu ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `canteen`
+--
+
+CREATE TABLE `canteen` (
+  `id` int(11) NOT NULL,
+  `cname` varchar(50) NOT NULL,
+  `cdescription` text NOT NULL,
+  `clocation` text NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `loc_img_path` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `canteen`
+--
+
+INSERT INTO `canteen` (`id`, `cname`, `cdescription`, `clocation`, `image_path`, `loc_img_path`) VALUES
+(1, 'Dhabba', 'Enjoy the desi foods, barbeques and rolls.', 'near student Facility Building', 'http://localhost/forum/php/api/assets/Canteens/dhabba.png', 'http://localhost/forum/php/api/assets/Canteens/dhabba-location.gif'),
+(2, 'Shawarma-Corner', 'Enjoy different delicious flavor of shawarmas', 'near to 2nd Main gate', 'http://localhost/forum/php/api/assets/Canteens/shawarmaCorner.png', 'http://localhost/forum/php/api/assets/Canteens/shawarma-corner-location.gif'),
+(3, 'Juice-Corner', 'Enjoy fresh fruits juices and shakes', 'near to 2nd Main gate', 'http://localhost/forum/php/api/assets/Canteens/juiceCorner.png', 'http://localhost/forum/php/api/assets/Canteens/juice-corner-location.gif'),
+(4, 'Tasty-Foods', 'Enjoy flavorful fries and snack items.', 'near to Electrical Engineering building', 'http://localhost/forum/php/api/assets/Canteens/tastyFoods.png', 'http://localhost/forum/php/api/assets/Canteens/tasty-foods-location.gif'),
+(5, 'Cafeteria', 'Enjoys bakery items such as donuts, cakes and many more', '2nd floor of student facility block', 'http://localhost/forum/php/api/assets/Canteens/cafeteria.png', 'http://localhost/forum/php/api/assets/Canteens/cafeteria-location.gif');
 
 -- --------------------------------------------------------
 
@@ -59,7 +85,7 @@ CREATE TABLE `carpool` (
   `phoneNo` varchar(20) NOT NULL,
   `time` varchar(10) NOT NULL,
   `day` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `carpool`
@@ -78,7 +104,7 @@ CREATE TABLE `course` (
   `cid` varchar(10) NOT NULL,
   `cname` varchar(55) NOT NULL,
   `coordinator` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `course`
@@ -87,6 +113,30 @@ CREATE TABLE `course` (
 INSERT INTO `course` (`cid`, `cname`, `coordinator`) VALUES
 ('CS2001', 'Algorithms', 1),
 ('CS2002', 'Database Systems', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu`
+--
+
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text NOT NULL,
+  `price` int(11) NOT NULL,
+  `canteen_id` int(11) NOT NULL,
+  `image_path` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `menu`
+--
+
+INSERT INTO `menu` (`id`, `name`, `description`, `price`, `canteen_id`, `image_path`) VALUES
+(1, 'Mayo Shawarma', 'Garlic mayo sauce with juicy chicken shawarma', 150, 2, 'http://localhost/forum/php/api/assets/Canteens/mayo_shawarma.jpg'),
+(2, 'Bun Kebeb', 'A tasty delight ,seasoned kebabfilled with special chutney and topped with fresh veggies. Simple, flavorful, and perfect for a quick, satisfying bite.', 120, 1, 'http://localhost/forum/php/api/assets/Canteens/bun_kebab.jpg'),
+(3, 'macaroni shawarma', 'Filled with flavorful macaroni and finger-licking sauce.', 150, 2, '');
 
 -- --------------------------------------------------------
 
@@ -103,7 +153,7 @@ CREATE TABLE `profile` (
   `about` varchar(500) DEFAULT NULL,
   `uid` varchar(7) NOT NULL,
   `quote` varchar(55) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `profile`
@@ -146,7 +196,7 @@ CREATE TABLE `resource` (
   `student_id` varchar(7) NOT NULL,
   `Drive_Link` varchar(100) NOT NULL,
   `date_of_publish` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `resource`
@@ -168,23 +218,24 @@ CREATE TABLE `society` (
   `sdescription` varchar(500) NOT NULL,
   `head_id` int(11) NOT NULL,
   `president_id` varchar(7) NOT NULL,
-  `socialMedia_link` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `socialMedia_link` varchar(100) NOT NULL,
+  `logo_img_path` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `society`
 --
 
-INSERT INTO `society` (`society_id`, `sname`, `sdescription`, `head_id`, `president_id`, `socialMedia_link`) VALUES
-(1, 'Dramatic and Extra Curricular Society', 'DECS has always been on the go in planning extra-activities such as picnics for the FASTians which prove to be both exhilarating and exclusive', 1, 'k200397', 'https://www.facebook.com/decsfast/'),
-(2, 'The Literary Club', 'TLC is the most active, the most happening and the most classy society at FAST. With events like Xpressions, Zauq, Agha Hasan Abedi Declamation Contest, Intra-MUN, Parliamentary Debates and an annual magazine called the localhost', 1, 'k200397', 'https://www.facebook.com/TLCFAST/'),
-(3, 'FAST DataScience Society', 'You don\'t know where to start from? or the platforms are too complicated?\r\nDon\'t have to be stressed out, as we are all set to provide You with the mentorship that You need. \r\nWith the vision and mission of providing a platform, and mentoring students into leading individuals of #DataIndulgingMysteries FAST Data Science Society', 1, 'k200434', 'https://www.facebook.com/profile.php?id=100086255005453'),
-(4, 'Association for Computing Machinery', 'The ACM Student Chapter at FAST-NUCES Karachi Campus is dedicated to the promotion of computing education, research and development.At ACM-NUCES KHI Chapter. You join a team that aims to change the methodology with which students approach computing and technology.', 2, 'k200434', 'https://www.facebook.com/acmnuce'),
-(5, 'Think N Create', 'The objective of the committee is to develop within students, skill sets related to the industry.\r\n          They shall be introduced to the current technical, managerial, ethical aspects of expertise in use or desired.', 3, 'k200397', 'https://www.facebook.com/tncfast'),
-(6, 'Association for Computing Machinery - Women', 'ACM-W supports, celebrates, and advocates internationally for the full engagement of women in all aspects of the computing field, providing a wide range of programs and services to ACM members and working in the larger community to advance the contributions of technical women.', 2, 'k200397', 'https://www.facebook.com/acmw.nuceskhi'),
-(7, 'Character Building Society', 'We, at CBS, help students to improve themselves by showing better character and enable them to know & act on their responsibilities in different life roles.', 3, 'k200434', 'https://www.facebook.com/CBSfastkhi\"\r\n'),
-(8, 'FAST Management Society', 'FMS is a society founded by the BBA Department. Our main objective is to evince better management skills in the real world job environment. We solely focus on our undergrads, as our goal is for every individual.', 3, 'k200434', 'https://www.facebook.com/28606FMS/'),
-(9, 'Google Developer Students Club', 'Google Developer Student Clubs (GDSC) are community groups for college and university students interested in Google developer technologies. Students from all undergraduate or graduate programs with an interest in growing as a developer are welcome', 2, 'k200434', 'https://www.facebook.com/dscnuces/');
+INSERT INTO `society` (`society_id`, `sname`, `sdescription`, `head_id`, `president_id`, `socialMedia_link`, `logo_img_path`) VALUES
+(1, 'Dramatic and Extra Curricular Society', 'DECS has always been on the go in planning extra-activities such as picnics for the FASTians which prove to be both exhilarating and exclusive', 1, 'k200397', 'https://www.facebook.com/decsfast/', 'http://localhost/forum/php/api/assets/Societies/Decs_logo.jpg'),
+(2, 'The Literary Club', 'TLC is the most active, the most happening and the most classy society at FAST. With events like Xpressions, Zauq, Agha Hasan Abedi Declamation Contest, Intra-MUN, Parliamentary Debates and an annual magazine called the localhost', 1, 'k200397', 'https://www.facebook.com/TLCFAST/', 'http://localhost/forum/php/api/assets/Societies/TLC_logo.jpg'),
+(3, 'FAST DataScience Society', 'You don\'t know where to start from? or the platforms are too complicated?\r\nDon\'t have to be stressed out, as we are all set to provide You with the mentorship that You need. \r\nWith the vision and mission of providing a platform, and mentoring students into leading individuals of #DataIndulgingMysteries FAST Data Science Society', 1, 'k200434', 'https://www.facebook.com/profile.php?id=100086255005453', 'http://localhost/forum/php/api/assets/Societies/fdss_logo.jpg'),
+(4, 'Association for Computing Machinery', 'The ACM Student Chapter at FAST-NUCES Karachi Campus is dedicated to the promotion of computing education, research and development.At ACM-NUCES KHI Chapter. You join a team that aims to change the methodology with which students approach computing and technology.', 2, 'k200434', 'https://www.facebook.com/acmnuce', 'http://localhost/forum/php/api/assets/Societies/ACM_logo.jpg'),
+(5, 'Think N Create', 'The objective of the committee is to develop within students, skill sets related to the industry.\r\n          They shall be introduced to the current technical, managerial, ethical aspects of expertise in use or desired.', 3, 'k200397', 'https://www.facebook.com/tncfast', ''),
+(6, 'Association for Computing Machinery - Women', 'ACM-W supports, celebrates, and advocates internationally for the full engagement of women in all aspects of the computing field, providing a wide range of programs and services to ACM members and working in the larger community to advance the contributions of technical women.', 2, 'k200397', 'https://www.facebook.com/acmw.nuceskhi', 'http://localhost/forum/php/api/assets/Societies/ACM_W_logo.png'),
+(7, 'Character Building Society', 'We, at CBS, help students to improve themselves by showing better character and enable them to know & act on their responsibilities in different life roles.', 3, 'k200434', 'https://www.facebook.com/CBSfastkhi\"\r\n', 'http://localhost/forum/php/api/assets/Societies/CBS_logo.jpg'),
+(8, 'FAST Management Society', 'FMS is a society founded by the BBA Department. Our main objective is to evince better management skills in the real world job environment. We solely focus on our undergrads, as our goal is for every individual.', 3, 'k200434', 'https://www.facebook.com/28606FMS/', 'http://localhost/forum/php/api/assets/Societies/FMS_logo.jpg'),
+(9, 'Google Developer Students Club', 'Google Developer Student Clubs (GDSC) are community groups for college and university students interested in Google developer technologies. Students from all undergraduate or graduate programs with an interest in growing as a developer are welcome', 2, 'k200434', 'https://www.facebook.com/dscnuces/', 'http://localhost/forum/php/api/assets/Societies/GDSC_logo.jpg');
 
 -- --------------------------------------------------------
 
@@ -197,7 +248,7 @@ CREATE TABLE `teacher` (
   `tname` varchar(55) NOT NULL,
   `email` varchar(55) NOT NULL,
   `location` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `teacher`
@@ -220,7 +271,7 @@ CREATE TABLE `timetable` (
   `tcode` varchar(20) NOT NULL,
   `croom` varchar(10) NOT NULL,
   `timeslot` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `timetable`
@@ -244,7 +295,7 @@ CREATE TABLE `user` (
   `email` varchar(17) NOT NULL,
   `password` varchar(55) NOT NULL,
   `role` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
@@ -266,6 +317,12 @@ ALTER TABLE `blog`
   ADD KEY `post_by` (`post_by`);
 
 --
+-- Indexes for table `canteen`
+--
+ALTER TABLE `canteen`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `carpool`
 --
 ALTER TABLE `carpool`
@@ -279,6 +336,13 @@ ALTER TABLE `course`
   ADD PRIMARY KEY (`cid`),
   ADD KEY `course_teacher_fk` (`coordinator`),
   ADD KEY `cid` (`cid`);
+
+--
+-- Indexes for table `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `canteen-menu` (`canteen_id`);
 
 --
 -- Indexes for table `profile`
@@ -341,16 +405,22 @@ ALTER TABLE `blog`
   MODIFY `Bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `canteen`
+--
+ALTER TABLE `canteen`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `carpool`
 --
 ALTER TABLE `carpool`
   MODIFY `carpool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
--- AUTO_INCREMENT for table `events`
+-- AUTO_INCREMENT for table `menu`
 --
-ALTER TABLE `events`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `menu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `profile`
@@ -411,6 +481,12 @@ ALTER TABLE `course`
   ADD CONSTRAINT `course_teacher_fk` FOREIGN KEY (`coordinator`) REFERENCES `teacher` (`tid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `menu`
+--
+ALTER TABLE `menu`
+  ADD CONSTRAINT `canteen-menu` FOREIGN KEY (`canteen_id`) REFERENCES `canteen` (`id`);
+
+--
 -- Constraints for table `profile`
 --
 ALTER TABLE `profile`
@@ -422,20 +498,6 @@ ALTER TABLE `profile`
 ALTER TABLE `project`
   ADD CONSTRAINT `project_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`cid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `project_user_FK` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `resource`
---
-ALTER TABLE `resource`
-  ADD CONSTRAINT `resource_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`cid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `resource_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `society`
---
-ALTER TABLE `society`
-  ADD CONSTRAINT `project_head_FK` FOREIGN KEY (`head_id`) REFERENCES `teacher` (`tid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `society_president_user_FK` FOREIGN KEY (`president_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
