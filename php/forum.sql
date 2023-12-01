@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2023 at 12:59 PM
+-- Generation Time: Dec 01, 2023 at 12:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -113,6 +113,29 @@ CREATE TABLE `course` (
 INSERT INTO `course` (`cid`, `cname`, `coordinator`) VALUES
 ('CS2001', 'Algorithms', 1),
 ('CS2002', 'Database Systems', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event`
+--
+
+CREATE TABLE `event` (
+  `id` int(11) NOT NULL,
+  `event_name` varchar(255) NOT NULL,
+  `month` varchar(50) NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `society_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`id`, `event_name`, `month`, `image_path`, `society_id`) VALUES
+(1, 'Sham-e-Sukoon', 'December', 'http://localhost/forum/php/api/assets/Events/shamesukhn.jpeg', 2),
+(2, 'Welcome Party', 'October', 'http://localhost/forum/php/api/assets/Events/welcomeParty.png', 1),
+(3, 'Alumini Dinner', 'November', 'http://localhost/forum/php/api/assets/Events/aluminiDinner.png', 1);
 
 -- --------------------------------------------------------
 
@@ -338,6 +361,13 @@ ALTER TABLE `course`
   ADD KEY `cid` (`cid`);
 
 --
+-- Indexes for table `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `event-society` (`society_id`);
+
+--
 -- Indexes for table `menu`
 --
 ALTER TABLE `menu`
@@ -417,6 +447,12 @@ ALTER TABLE `carpool`
   MODIFY `carpool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
+-- AUTO_INCREMENT for table `event`
+--
+ALTER TABLE `event`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
@@ -479,6 +515,12 @@ ALTER TABLE `carpool`
 --
 ALTER TABLE `course`
   ADD CONSTRAINT `course_teacher_fk` FOREIGN KEY (`coordinator`) REFERENCES `teacher` (`tid`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `event`
+--
+ALTER TABLE `event`
+  ADD CONSTRAINT `event-society` FOREIGN KEY (`society_id`) REFERENCES `society` (`society_id`);
 
 --
 -- Constraints for table `menu`
