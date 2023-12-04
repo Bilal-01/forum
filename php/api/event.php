@@ -10,7 +10,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch($method){
     case 'GET':
-        $results = $db->complexQuery("SELECT * FROM event");
+        $results = $db->complexQuery("SELECT e.*,s.sname as society_name FROM event e Left join society s on e.society_id = s.society_id");
      
         if($results->count()) {
             $response=['status'=>1,'results'=>$results->results(),'message'=>'Success'];

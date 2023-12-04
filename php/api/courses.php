@@ -11,7 +11,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch($method){
     case 'GET':
-        $results = $db->complexQuery("SELECT * from course");
+        $results = $db->complexQuery("SELECT c.*, t.tname from course c left join teacher t on c.coordinator = t.tid");
         if($results->count())
         {
             $response=['status'=>1,'results'=>$results->results(),'message'=>'Success'];
