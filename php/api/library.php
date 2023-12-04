@@ -24,7 +24,7 @@ switch($method){
 
     case 'POST':
         $data = json_decode(file_get_contents('php://input'));
-        if($db->insert('canteen', ['id' => null, 'cname' => $data->cname, 'cdescription' => $data->cdescription])){
+        if($db->insert('book', ['book_id' => null, 'isbn' => $data->isbn, 'title' => $data->title,'author' => $data->author,'pages' => $data->pages,'course_id' => $data->courseId,'available' => $data->available,])){
             $response=['status' => 1, 'message'=>'Record inserted successfully'];
         }
         else{
@@ -32,12 +32,11 @@ switch($method){
         }
         echo json_encode($response);
         break;
-        break;
 
     case 'DELETE':
         $data = json_decode( file_get_contents('php://input') );
         $sid = $data;
-        if($db->delete('canteen',['id','=',$sid]))
+        if($db->delete('book',['book_id','=',$sid]))
         {
             $response = ['status' => 1 , 'message'=>'Success'];
         }
