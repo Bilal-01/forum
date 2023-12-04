@@ -33,5 +33,18 @@ switch($method){
 
        echo json_encode($response);
        break;
+
+
+    case 'DELETE':
+        $data = json_decode( file_get_contents('php://input') );
+        $id = $data;
+            if($db->delete('event',['id','=',$id]))
+            {
+                $response = ['status' => 1 , 'message'=>'Success'];
+            }
+            else{
+                $response = ['status' => 0 , 'message'=>'Failure'];
+            }
+            break;
 }
 ?>
