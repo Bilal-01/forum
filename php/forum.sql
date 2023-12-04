@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2023 at 12:02 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Generation Time: Dec 04, 2023 at 11:01 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,6 +43,37 @@ INSERT INTO `blog` (`Bid`, `Heading`, `post_by`, `date_of_post`, `description`) 
 (1, 'Lorem Ipsum', 'k200397', '2022-12-01', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla pretium mi a volutpat. Phasellus sed enim vitae justo feugiat venenatis at id purus. Aenean eros felis, egestas eget fringilla ac, fringilla vitae lectus. Nullam tincidunt at urna eu '),
 (2, 'Lorem ipsum', 'k200434', '2022-12-03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla pretium mi a volutpat. Phasellus sed enim vitae justo feugiat venenatis at id purus. Aenean eros felis, egestas eget fringilla ac, fringilla vitae lectus. Nullam tincidunt at urna eu '),
 (3, 'Lorem ipsum', 'k200434', '2022-12-03', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fringilla pretium mi a volutpat. Phasellus sed enim vitae justo feugiat venenatis at id purus. Aenean eros felis, egestas eget fringilla ac, fringilla vitae lectus. Nullam tincidunt at urna eu ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book`
+--
+
+CREATE TABLE `book` (
+  `book_id` int(11) NOT NULL,
+  `isbn` varchar(20) NOT NULL,
+  `title` varchar(55) NOT NULL,
+  `author` varchar(256) NOT NULL,
+  `pages` int(11) NOT NULL,
+  `available` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `book`
+--
+
+INSERT INTO `book` (`book_id`, `isbn`, `title`, `author`, `pages`, `available`) VALUES
+(11, '1234567890', 'Sample Book Title 1', 'John Doe', 200, 1),
+(12, '9876543210', 'Sample Book Title 2', 'Jane Smith', 300, 0),
+(13, '1112223334', 'Sample Book Title 3', 'Bob Johnson', 150, 1),
+(14, '4445556667', 'Sample Book Title 4', 'Alice Brown', 250, 1),
+(15, '8889990001', 'Sample Book Title 5', 'Charlie Davis', 180, 0),
+(16, '2223334445', 'Sample Book Title 6', 'Eva White', 220, 1),
+(17, '6667778889', 'Sample Book Title 7', 'Frank Black', 320, 0),
+(18, '9990001112', 'Sample Book Title 8', 'Grace Lee', 280, 1),
+(19, '5556667778', 'Sample Book Title 9', 'David Turner', 190, 0),
+(20, '3334445556', 'Sample Book Title 10', 'Sophie Miller', 210, 1);
 
 -- --------------------------------------------------------
 
@@ -135,7 +166,14 @@ CREATE TABLE `event` (
 INSERT INTO `event` (`id`, `event_name`, `month`, `image_path`, `society_id`) VALUES
 (1, 'Sham-e-Sukoon', 'December', 'http://localhost/forum/php/api/assets/Events/shamesukhn.jpeg', 2),
 (2, 'Welcome Party', 'October', 'http://localhost/forum/php/api/assets/Events/welcomeParty.png', 1),
-(3, 'Alumini Dinner', 'November', 'http://localhost/forum/php/api/assets/Events/aluminiDinner.png', 1);
+(3, 'Alumini Dinner', 'November', 'http://localhost/forum/php/api/assets/Events/aluminiDinner.png', 1),
+(4, 'Annual Tour', 'January', 'http://localhost/forum/php/api/assets/Events/annual-tour.png', 1),
+(5, 'Khud Ki Talash x Raja Zia', 'December', 'http://localhost/forum/php/api/assets/Events/khud-ki-talash.png', 7),
+(6, 'Session on How to safeguard the Digital Realm', 'November', 'http://localhost/forum/php/api/assets/Events/session-digital-realm.jpg', 9),
+(7, 'Coders Cup', 'October', 'http://localhost/forum/php/api/assets/Events/coders-cup.png', 4),
+(8, 'Hack Overflow', 'February', 'http://localhost/forum/php/api/assets/Events/hack-overflow.jpg', 6),
+(9, 'Math Olympiad', 'November', 'http://localhost/forum/php/api/assets/Events/math-olympiad.jpg', 5),
+(10, 'Data Quest-I', 'December', 'http://localhost/forum/php/api/assets/Events/data-quest.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -159,7 +197,14 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`id`, `name`, `description`, `price`, `canteen_id`, `image_path`) VALUES
 (1, 'Mayo Shawarma', 'Garlic mayo sauce with juicy chicken shawarma', 150, 2, 'http://localhost/forum/php/api/assets/Canteens/mayo_shawarma.jpg'),
 (2, 'Bun Kebeb', 'A tasty delight ,seasoned kebabfilled with special chutney and topped with fresh veggies. Simple, flavorful, and perfect for a quick, satisfying bite.', 120, 1, 'http://localhost/forum/php/api/assets/Canteens/bun_kebab.jpg'),
-(3, 'macaroni shawarma', 'Filled with flavorful macaroni and finger-licking sauce.', 150, 2, '');
+(3, 'macaroni shawarma', 'Filled with flavorful macaroni and finger-licking sauce.', 150, 2, 'http://localhost/forum/php/api/assets/Canteens/macroni-shawarma.jpg'),
+(18, 'Chicken Roll', 'Juicy tender chicken wrapped in a loaf of delish bread, filled with sauces!', 150, 1, 'http://localhost/forum/php/api/assets/Canteens/chicken-roll.jpg\n'),
+(19, 'Fresh Lemonade', 'Squeezed lemons filled to the brim with chilled soda, just what you need to refresh you!', 30, 3, 'http://localhost/forum/php/api/assets/Canteens/lemonade.jpg'),
+(20, 'Apple Juice', 'Freshly extracted apple juice from juicy sweet apples, chilled with ice cubes!', 120, 3, 'http://localhost/forum/php/api/assets/Canteens/apple-juice.jpg'),
+(21, 'Pizza', 'Oven-baked, cheesy chicken pizza, with black olives toppings, is the meal you need!', 400, 4, 'http://localhost/forum/php/api/assets/Canteens/pizza.jpg'),
+(22, 'Pizza Fries', 'Crispy, crunchy Fries, loaded with cheese, chicken and sauces. ', 250, 4, 'http://localhost/forum/php/api/assets/Canteens/pizza-fries.jpg'),
+(23, 'Zinger Burger', 'A big crispy zinger piece, between two oven baked buns, juicy with all the sauces is the ultimate Burger!', 500, 5, 'http://localhost/forum/php/api/assets/Canteens/zinger-burger.jpg'),
+(24, 'Biryani', 'For any Pakistani, Biryani needs no description. Come and grab a plate of hot spicy chicken biryani!', 180, 5, 'http://localhost/forum/php/api/assets/Canteens/biryani.jpg');
 
 -- --------------------------------------------------------
 
@@ -340,6 +385,12 @@ ALTER TABLE `blog`
   ADD KEY `post_by` (`post_by`);
 
 --
+-- Indexes for table `book`
+--
+ALTER TABLE `book`
+  ADD PRIMARY KEY (`book_id`);
+
+--
 -- Indexes for table `canteen`
 --
 ALTER TABLE `canteen`
@@ -435,6 +486,12 @@ ALTER TABLE `blog`
   MODIFY `Bid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `book`
+--
+ALTER TABLE `book`
+  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT for table `canteen`
 --
 ALTER TABLE `canteen`
@@ -450,13 +507,13 @@ ALTER TABLE `carpool`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `profile`
