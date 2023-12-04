@@ -11,7 +11,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch($method){
     case 'GET':
-        $results = $db->complexQuery("SELECT s.society_id, s.sname, s.sdescription, s.head_id, s.president_id,s.socialMedia_link,s.logo_img_path,t.tname,
+        $results = $db->complexQuery("SELECT s.society_id, s.sname, s.sdescription, s.head_id, s.president_id,s.socialMedia_link,s.logo_img_path,t.tname as t_name,
         t.tid FROM society s LEFT JOIN teacher t ON s.head_id = t.tid");
         if($results->count())
         {
